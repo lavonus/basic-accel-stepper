@@ -1,0 +1,32 @@
+#include <Arduino.h>
+
+#define stepPin 19
+#define dirPin 18
+
+void setup() {
+
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(stepPin, OUTPUT);
+  pinMode(dirPin, OUTPUT);
+
+  
+}
+
+bool dir = HIGH;
+int count = 0;
+// the loop function runs over and over again forever
+void loop() {
+  count++;
+  if (count > 10000){
+    dir = !dir;
+    count = 0;
+  }
+  digitalWrite(dirPin,dir);
+
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(stepPin, HIGH);
+  delayMicroseconds(100);                      
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(stepPin, LOW);
+  delayMicroseconds(100);                       
+}
