@@ -1,0 +1,34 @@
+void setup(){
+  pinMode(pulPin, OUTPUT);
+ pinMode(dirPin,OUTPUT);
+
+}
+
+void loop(){
+   if (count > 10000){
+    dirbool = !dirbool;
+    count = 0;
+    x = 1000;
+ }
+ 
+  if(dirbool == true){
+     digitalWrite(dirPin, LOW);
+  }
+  else{
+     digitalWrite(dirPin, HIGH);
+  }
+  digitalWrite(pulPin, HIGH);
+  delayMicroseconds(100);
+
+  digitalWrite(pulPin,LOW);
+  delayMicroseconds(x+100);
+
+  if(count < 1000){
+    x--;
+  }
+  if(count > 8000){
+    x++;
+  }
+  
+  count++;
+ }
