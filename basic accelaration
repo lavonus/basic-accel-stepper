@@ -1,0 +1,20 @@
+#include <Arduino.h>
+#include <AccelStepper.h>
+AccelStepper stepper(AccelStepper::DRIVER,19,18);
+
+void setup()
+{  
+  // Change these to suit your stepper if you want
+  stepper.setMaxSpeed(5000);
+  stepper.setAcceleration(1000);
+  stepper.moveTo(6000);
+}
+
+void loop()
+{
+    // If at the end of travel go to the other end
+    if (stepper.distanceToGo() == 0)
+      stepper.moveTo(-stepper.currentPosition());
+
+    stepper.run();
+}
