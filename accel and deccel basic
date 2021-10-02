@@ -1,0 +1,50 @@
+#include <Arduino.h>
+
+int pulpin = 19;
+int dirpin = 18;
+bool dirbool = true;
+int count = 0;
+int accelcount = 100;
+int x;
+
+void setup() {
+  pinMode(pulpin, OUTPUT);
+  pinMode(dirpin,OUTPUT);
+}
+
+void loop() {
+
+  //deterimins direction:
+  if(count > 10000){
+    if(dirbool == true){
+       digitalWrite(dirpin, HIGH);
+       dirbool = false;
+    }
+    else{
+     digitalWrite(dirpin,LOW);
+     dirbool = true;
+    }
+    count = 0;
+  }
+  //move motor:
+ 
+  digitalWrite(pulpin,HIGH);
+  delayMicroseconds(100);
+  digitalWrite(pulpin,LOW);
+  //accelaration
+   if(count < 1000){
+  delayMicroseconds(1000 - count +100);
+   }
+   //decceleration
+   else if (count > 9000)
+   {
+      delayMicroseconds((count-9000)+100);
+   }
+   //regular movement
+   else{
+     delayMicroseconds(100);
+   }
+   
+  count++;
+  
+}
