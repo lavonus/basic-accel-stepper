@@ -1,0 +1,38 @@
+#include <Arduino.h>
+
+const int pulPin = 33;
+const int dirPin = 35;
+const int Vpin = 27;
+
+float Volt;
+int intVolt;
+int potValue;
+int count = 0;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(Vpin, INPUT);
+  pinMode(pulPin,OUTPUT);
+  pinMode(dirPin,OUTPUT);
+}
+
+void loop() {
+    
+    count++;
+    if (count == 1000){
+        Serial.println(4135-Volt);
+        count = 0;
+    }
+
+    Volt = analogRead(Vpin);
+    
+    if(Volt != 4095){
+        digitalWrite(pulPin,HIGH);
+    }
+    
+    delayMicroseconds(100);
+    digitalWrite(pulPin,LOW);
+    delayMicroseconds(40 + Volt);
+
+  }
+
